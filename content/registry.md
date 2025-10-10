@@ -2,4 +2,4 @@
 title: "Registry"
 ---
 
-{{< partial "registry.html" >}}
+{{ partial "registry.html" }}
