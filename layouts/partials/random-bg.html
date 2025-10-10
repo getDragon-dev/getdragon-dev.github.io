@@ -1,0 +1,75 @@
+{{/* layouts/partials/random-bg.html */}}
+{{- $bgList := slice -}}
+
+{{/* 1) If the page provides backgrounds in front matter */}}
+{{- with .Params.backgrounds -}}
+  {{- range . -}}
+    {{- $p := . -}}
+    {{- $item := dict -}}
+
+    {{- if or (strings.HasPrefix $p "/") (strings.HasPrefix $p "http") -}}
+      {{/* Absolute/static path or external URL */}}
+      {{- $item = dict "src" $p -}}
+    {{- else -}}
+      {{/* Try to resolve as an asset in /assets/backgrounds */}}
+      {{- $path := $p -}}
+      {{- if not (hasPrefix $p "backgrounds/") -}}
+        {{- $path = printf "backgrounds/%s" $p -}}
+      {{- end -}}
+      {{- with resources.Get $path -}}
+        {{- $resized := .Fit "2400x1600 q80" -}}
+        {{- $item = dict "src" $resized.RelPermalink -}}
+      {{- else -}}
+        {{/* Fallback: serve as static relative path */}}
+        {{- $item = dict "src" (printf "/%s" $p) -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $bgList = $bgList | append $item -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 2) If no backgrounds in front matter, auto-pull all assets */}}
+{{- if eq (len $bgList) 0 -}}
+  {{- $imgs := resources.Match "backgrounds/*" -}}
+  {{- range $imgs -}}
+    {{- $resized := .Fit "2400x1600 q80" -}}
+    {{- $bgList = $bgList | append (dict "src" $resized.RelPermalink) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 3) Gradient fallbacks */}}
+{{- $gradients := slice
+    "linear-gradient(135deg,#0ea5ea 0%,#2a2a72 100%)"
+    "linear-gradient(135deg,#ff9a9e 0%,#fad0c4 100%)"
+    "linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%)"
+    "linear-gradient(135deg,#f6d365 0%,#fda085 100%)"
+-}}
+
+<script>
+(function () {
+  const prefersReducedData = window.matchMedia('(prefers-reduced-data: reduce)').matches;
+  const imgs = {{- $bgList | jsonify | safeJS -}};
+  const gradients = {{- $gradients | jsonify | safeJS -}};
+
+  function pick(arr){ return arr[Math.floor(Math.random() * arr.length)] }
+
+  if (imgs.length && !prefersReducedData) {
+    const chosen = pick(imgs).src;
+    const i = new Image();
+    i.src = chosen;
+    i.onload = function(){
+      document.body.style.backgroundImage = `url('${chosen}')`;
+    };
+    setTimeout(() => {
+      if (!document.body.style.backgroundImage) {
+        document.body.style.setProperty('--bg-fallback', pick(gradients));
+      }
+    }, 600);
+  } else {
+    document.body.style.setProperty('--bg-fallback', pick(gradients));
+  }
+
+  document.documentElement.style.setProperty('--bg-overlay', 'rgba(0,0,0,.25)');
+})();
+</script>

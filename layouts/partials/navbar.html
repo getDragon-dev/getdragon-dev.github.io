@@ -1,0 +1,8 @@
+<nav class="site-nav" aria-label="Main">
+  {{ $current := .RelPermalink }}
+
+  <a href="/" class="nav-link{{ if eq $current "/" }} active{{ end }}">Home</a>
+
+  {{ $t := "/guide/" }}
+  <a href="{{ $t }}" class="nav-link{{ if hasPrefix $current $t }} active{{ end }}">Guide</a>
+</nav>

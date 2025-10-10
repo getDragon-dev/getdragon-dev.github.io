@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ block "title" . }}{{ .Title }}{{ end }}</title>
+  {{ block "head" . }}{{ end }}
+  <style>
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg-fallback, #0b132b) center/cover no-repeat fixed;
+      color: #111;
+    }
+    .bg-overlay {
+      position: fixed; inset: 0;
+      background: var(--bg-overlay, rgba(0,0,0,.25));
+      pointer-events: none;
+    }
+    .page { position: relative; min-height: 100%; }
+  </style>
+  <style>
+  /* Landing card */
+  .landing-wrap {
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+  }
+  .landing-card {
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    border-radius: 28px;
+    padding: 28px 22px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25), 0 6px 20px rgba(0,0,0,.1);
+  }
+
+  .brand {
+    display: grid;
+    place-items: center;
+    margin-bottom: 18px;
+  }
+  .brand img {
+    max-height: 64px;
+    width: auto;
+  }
+  .brand .txt {
+    font-family: ui-serif, "Times New Roman", Georgia, serif;
+    font-weight: 600;
+    letter-spacing: .12em;
+    font-size: 34px;
+  }
+
+  .divider {
+    border: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, #e8e8e8, transparent);
+    margin: 18px 0;
+  }
+
+  .subhead, .title-sm, .muted {
+    text-align: center;
+  }
+  .subhead {
+    font-size: 13px; letter-spacing: .18em; text-transform: uppercase;
+  }
+  .title-sm { font-weight: 700; letter-spacing: .12em; margin-top: 8px; }
+  .muted { color: #555; line-height: 1.6; margin: 12px 0 18px; }
+
+  .icon-row, .policy-row, .social-row {
+    display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap;
+  }
+  .policy-row a { color: #111; text-decoration: none; }
+  .policy-row .dot { opacity: .5; }
+  .email-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: #111; text-decoration: none; font-weight: 700;
+  }
+  .email-link:hover, .policy-row a:hover { text-decoration: underline; }
+
+  .icon-16 { width: 16px; height: 16px; display: inline-block; }
+  .icon-20 { width: 20px; height: 20px; display: inline-block; }
+
+  @media (min-width: 480px) {
+    .landing-card { padding: 36px 28px; border-radius: 32px; }
+  }
+  .site-nav{
+  display:flex; gap:14px; align-items:center; justify-content:center;
+  width:max-content; margin:16px auto 0; padding:8px 12px;
+  background: rgba(255,255,255,.75);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+}
+.site-nav .nav-link{
+  display:inline-block; padding:6px 10px; border-radius:999px;
+  font-size:14px; font-weight:600; color:#111; text-decoration:none;
+}
+.site-nav .nav-link:hover{ text-decoration:underline; }
+.site-nav .nav-link.active{ background: rgba(0,0,0,.08); }
+@media (max-width:480px){
+  .site-nav{ margin-top:12px; padding:6px 10px; gap:10px; }
+  .site-nav .nav-link{ font-size:13px; padding:6px 8px; }
+}
+</style>
+{{ partial "favicons.html" . }}
+</head>
+<body>
+  {{ partial "random-bg.html" . }}
+  <div class="page">
+    <header>
+      {{ partial "navbar.html" . }}
+    </header>
+
+    <main>
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer>
+      © {{ now.Year }} {{ site.Title }}
+    </footer>
+  </div>
+  <div class="bg-overlay" aria-hidden="true"></div>
+</body>
+</html>
