@@ -7,3 +7,18 @@ params:
   defaultTheme: auto
   ShowShareButtons: false
   ShowReadingTime: false
+
+menu:
+  main:
+    - identifier: home
+      name: "Home"
+      url: "/"
+      weight: 10
+    - identifier: guide
+      name: "Guide"
+      url: "/guide"
+      weight: 20
+    - identifier: registry
+      name: Registry
+      url: "/registry"
+      weight: 30

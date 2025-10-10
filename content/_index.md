@@ -1,6 +1,5 @@
 ---
 title: "DragonDev"
-date: 2025-10-10
 draft: false
 layout: "home"
 ---
