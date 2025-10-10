@@ -1,5 +1,4 @@
 ---
 title: "Registry"
+layout: registry
 ---
-
-{{< registry >}}

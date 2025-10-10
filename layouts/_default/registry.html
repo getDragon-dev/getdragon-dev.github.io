@@ -1,0 +1,24 @@
+{{ define "main" }}
+<main class="main">
+  <article class="post-entry">
+    <header class="entry-header"><h1>{{ .Title }}</h1></header>
+    <section class="entry-content">
+      {{ $db := site.Data.registry }}
+      <div class="registry">
+        {{ range $db.blueprints }}
+        <div class="card">
+          <h3>{{ .name }} <small>{{ .version }}</small></h3>
+          <p>{{ .description }}</p>
+          <a href="{{ .download_url }}">Download</a>
+
+          {{ $tags := .tags | default (slice) }}
+          {{ if gt (len $tags) 0 }}
+            <div><small>Tags: {{ delimit $tags ", " }}</small></div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </section>
+  </article>
+</main>
+{{ end }}
