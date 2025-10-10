@@ -1,0 +1,4 @@
+baseURL: https://getdragon.dev/
+languageCode: en-us
+title: DragonDev
+theme: ["PaperMod"]
