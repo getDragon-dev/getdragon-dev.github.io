@@ -1,21 +1,37 @@
 {{ define "main" }}
 <main class="main">
-  <article class="post-entry">
-    <header class="entry-header"><h1>{{ .Title }}</h1></header>
-    <section class="entry-content">
-      {{ $db := site.Data.registry }}
-      <div class="registry">
-        {{ range $db.blueprints }}
-        <div class="card">
-          <h3>{{ .name }} <small>{{ .version }}</small></h3>
-          <p>{{ .description }}</p>
-          <a href="{{ .download_url }}">Download</a>
+  <article class="post-single">
+    <header class="post-header">
+      <h1 class="post-title">{{ .Title }}</h1>
+    </header>
 
-          {{ $tags := .tags | default (slice) }}
+    <section class="post-content">
+      {{ $db := site.Data.registry }}
+      <div class="registry-grid">
+        {{ range $db.blueprints }}
+        <article class="registry-card">
+          <header>
+            <h3 class="registry-title">{{ .name }}</h3>
+            <span class="registry-version">{{ .version }}</span>
+          </header>
+
+          <p class="registry-desc">{{ .description }}</p>
+
+          <div class="registry-actions">
+            <a class="registry-btn" href="{{ .download_url }}">Download</a>
+          </div>
+
+          {{ $raw := .tags | default (slice) }}
+          {{ $tags := slice }}
+          {{ range $raw }}{{ $tags = $tags | append (printf "%v" .) }}{{ end }}
           {{ if gt (len $tags) 0 }}
-            <div><small>Tags: {{ delimit $tags ", " }}</small></div>
+          <ul class="registry-tags">
+            {{ range $tags }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
           {{ end }}
-        </div>
+        </article>
         {{ end }}
       </div>
     </section>

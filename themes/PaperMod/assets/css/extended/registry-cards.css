@@ -1,0 +1,71 @@
+/* grid */
+.registry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+/* card */
+.registry-card {
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  background: var(--entry);
+  box-shadow: var(--shadow);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.registry-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+
+/* header */
+.registry-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.registry-version {
+  margin-left: .5rem;
+  font-size: .9rem;
+  opacity: .7;
+}
+
+/* desc */
+.registry-desc { margin: .5rem 0 .75rem; }
+
+/* actions */
+.registry-actions { margin-bottom: .75rem; }
+.registry-btn {
+  display: inline-block;
+  padding: .4rem .7rem;
+  border: none;
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  color: #fff;
+  font-weight: 600;
+}
+.registry-btn:hover { filter: brightness(1.1); }
+
+/* tags as chips */
+.registry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.registry-tags li {
+  padding: .15rem .5rem;
+  border-radius: 999px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  font-size: .8rem;
+  opacity: .9;
+}
+
+/* use PaperMod CSS vars for dark/light */
+:root {
+  --shadow: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-lift: 0 6px 20px rgba(0,0,0,.12);
+}
