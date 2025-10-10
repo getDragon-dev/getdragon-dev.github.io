@@ -1,0 +1,7 @@
+baseURL = 'https://getdragon.dev/'
+languageCode = 'en-us'
+title = 'Get Dragon'
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true 
