@@ -1,0 +1,47 @@
+{{ define "main" }}
+<main class="prose mx-auto px-6 py-12">
+  <h1>{{ .Title }}</h1>
+  <p>All published blueprints from the DragonDev registry.</p>
+
+  <div id="registry" aria-busy="true">Loading…</div>
+</main>
+
+<script>
+(async () => {
+  try {
+    const res = await fetch('/registry.json', { cache: 'no-store' });
+    const data = await res.json();
+
+    const container = document.getElementById('registry');
+    container.setAttribute('aria-busy', 'false');
+    if (!Array.isArray(data) && !Array.isArray(data?.items)) {
+      container.textContent = 'No blueprints found.';
+      return;
+    }
+    const items = Array.isArray(data) ? data : data.items;
+
+    const list = document.createElement('div');
+    list.className = 'grid gap-4 md:grid-cols-2 lg:grid-cols-3';
+
+    items.forEach((bp) => {
+      const card = document.createElement('article');
+      card.className = 'border rounded-xl p-4 shadow-sm';
+      card.innerHTML = `
+        <h3 class="m-0 text-lg font-semibold">${bp.name ?? 'Unnamed'}</h3>
+        <p class="m-0 text-sm opacity-80">${bp.description ?? ''}</p>
+        <dl class="mt-2 text-sm">
+          ${bp.version ? `<div><dt class="inline opacity-70">Version:</dt> <dd class="inline">${bp.version}</dd></div>` : ''}
+          ${bp.repo ? `<div><dt class="inline opacity-70">Repo:</dt> <dd class="inline"><a class="underline" href="${bp.repo}">${bp.repo}</a></dd></div>` : ''}
+        </dl>
+      `;
+      list.appendChild(card);
+    });
+
+    container.replaceChildren(list);
+  } catch (e) {
+    document.getElementById('registry').textContent = 'Failed to load registry.';
+    console.error(e);
+  }
+})();
+</script>
+{{ end }}

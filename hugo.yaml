@@ -2,3 +2,8 @@ baseURL: https://getdragon.dev/
 languageCode: en-us
 title: DragonDev
 theme: ["PaperMod"]
+
+params:
+  defaultTheme: auto
+  ShowShareButtons: false
+  ShowReadingTime: false
