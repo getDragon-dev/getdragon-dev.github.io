@@ -32,5 +32,3 @@ Check out the full registry of public blueprints:
 Start by reading the [Guide](/guide) or visit the [GitHub org](https://github.com/getDragon-dev).
 
 ---
-
-**Made with Go • Powered by Hugo**
