@@ -241,8 +241,8 @@ hugo server -D
 ```
 ## 🔗 Related Docs
 
-👉 Blueprint Authoring Guide
+👉 [Blueprint Authoring Guide](/blueprint)
 
-👉 Getting Started Guide
+👉 [Getting Started Guide](/guide)
 
-👉 Command Reference
+👉 [Command Reference](/command)
