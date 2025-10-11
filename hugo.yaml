@@ -22,6 +22,14 @@ menu:
       name: "Command"
       url: "/command"
       weight: 30
+    - identity: blueprint
+      name: "Blueprint"
+      url: "/blueprint"
+      weight: 40
+    - identity: continuous-delivery
+      name: "Continuous Delivery"
+      url: "/continuous-delivery"
+      weight: 30
     - identifier: registry
       name: Registry
       url: "/registry"
