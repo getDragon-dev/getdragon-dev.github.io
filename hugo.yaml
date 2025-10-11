@@ -18,7 +18,15 @@ menu:
       name: "Guide"
       url: "/guide"
       weight: 20
+    - identity: command
+      name: "Command"
+      url: "/command"
+      weight: 30
     - identifier: registry
       name: Registry
       url: "/registry"
-      weight: 30
+      weight: 90
+    - identity: GitHub
+      name: "GitHub"
+      url: "https://github.com/getDragon-dev/"
+      weight: 100
