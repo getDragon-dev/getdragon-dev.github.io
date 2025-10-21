@@ -1,4 +1,4 @@
-baseURL: https://getdragon-dev.github.io/dragon-website/
+baseURL: https://getdragon-dev.github.io/
 languageCode: en-us
 title: DragonDev
 theme: ["PaperMod"]
